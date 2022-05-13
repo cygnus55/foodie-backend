@@ -1,0 +1,101 @@
+{% extends "accounts/base.html" %}
+
+{% load static %}
+
+{% block extrastyle %}
+    .navbar-brand {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 54px;
+    }
+
+    h3 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 54px;
+    }
+    {% block restaurant_extrastyle %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'restaurants:restaurant_home' %}">
+                <img src="{{ user.restaurant.logo.url }}"
+                    class="rounded"
+                    alt="{{ user.full_name }} logo"
+                    width=100
+                    height=100
+                />
+                <span class="mx-3">
+                    {{ user.full_name }}
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex align-items-center">
+                    <a href="{% url 'restaurants:food_list' %}" class="nav-link text-primary">
+                        My Foods
+                    </a>
+                    <a href="{% url 'restaurants:food_create' %}" class="nav-link text-primary">
+                        Add Food
+                    </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle btn my-md-0 ms-md-3" href="#" id="navbarDropdown"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear fa-2x"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdown">
+                            <li>
+                                <a href="{% url 'restaurants:account_settings' %}" class="dropdown-item">
+                                    <i class="fa-solid fa-user-gear"></i> Account Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'restaurants:get_location' %}" class="dropdown-item">
+                                    <i class="fa-solid fa-location-dot"></i> Edit Location
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'restaurants:change_password' %}" class="dropdown-item">
+                                    <i class="fa-solid fa-lock"></i> Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:restaurant_logout' %}?next=/" class="dropdown-item">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-md-12">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        {% block restaurant_content %}{% endblock restaurant_content %}
+    </div>
+</div>
+{% endblock content %}

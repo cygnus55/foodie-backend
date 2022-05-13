@@ -1,0 +1,56 @@
+# create order
+# method CART means that the order will be created using the cart
+# method DIRECT means that the order will be directly created from the food details page
+
+# Send khalti_token only if payment method is khalti
+POST http://localhost:8000/orders/create/
+Authorization: Token afe59afcb8d5932a5b4ceb27943dc32465138cd4
+Content-Type: application/json
+
+{
+    "method": "CART",
+    "latitude": "27.7",
+    "longitude": "85.33",
+    "address": "",
+    "items": [
+        {
+            "food_id": 3,
+            "quantity": 5,
+            "price": 180.00
+        },
+        {
+            "food_id": 2,
+            "quantity": 1,
+            "price": 250.00
+        }
+    ],
+    "payment_method": "Khalti",
+    "khalti_token": "fgsaghd65rfg23",
+    "delivery_charge": 120.00
+}
+
+###
+
+# get order list
+GET http://localhost:8000/orders/
+Authorization: Token f23122ffa50bdd3240992758de487643761aef96
+
+
+###
+
+# Get five recent delivery location
+GET http://localhost:8000/orders/delivery-location/
+Authorization: Token f23122ffa50bdd3240992758de487643761aef96
+
+###
+
+# Get delivery charge. send restaurant_id only for direct payment method. not required if checkout from CART.
+POST http://localhost:8000/orders/delivery-charge/
+Authorization: Token afe59afcb8d5932a5b4ceb27943dc32465138cd4
+Content-Type: application/json
+
+{
+    "latitude": "27.1211331",
+    "longitude": "85.1436541",
+    "restaurant_id": [1]
+}

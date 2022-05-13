@@ -1,0 +1,93 @@
+# delivery person login
+
+POST http://localhost:8000/accounts/login/delivery-person/
+Content-Type: application/json
+
+{
+    "mobile": "9123456789",
+    "password": "9123456789"
+}
+
+###
+
+# Change password
+
+POST http://localhost:8000/delivery-person/change-password/
+Authorization: Token <token>
+Content-Type: application/json
+
+{
+    "password": "password",
+}
+
+###
+
+# Get profile
+GET http://localhost:8000/delivery-person/profile/
+Authorization: Token <token>
+
+###
+
+# PUT profile
+
+PUT http://localhost:8000/delivery-person/profile/
+Authorization: Token <token>
+Content-Type: application/json
+
+{
+    "full_name": "John Doe",
+    "email": "john@example.com",
+    "profile_pic": "http://example.com/profile.jpg",
+    "location": ["latitude", "longitude"]
+}
+
+###
+
+# PATCH profile. Send only the fields you want to update
+
+PATCH http://localhost:8000/delivery-person/profile/
+Authorization: Token <token>
+Content-Type: application/json
+
+{
+    "full_name": "John Doe"
+}
+
+###
+
+# Get new orders
+
+GET http://localhost:8000/delivery-person/new-orders/
+Authorization: Token 9b0041e81e46f4fc64d65da24eec3d54c175d013
+
+###
+
+# Accept order
+POST http://localhost:8000/delivery-person/accept-order/
+Authorization: Token 9b0041e81e46f4fc64d65da24eec3d54c175d013
+Content-Type: application/json
+
+{
+    "order_id": "20220331-2"
+}
+
+###
+
+# Update Status
+# Status can be: "Verified", "On the way to restaurant", "Processing", "Picking", "On the way", "Delivered" or "Cancelled"
+POST http://localhost:8000/delivery-person/update-status/
+Authorization: Token 9b0041e81e46f4fc64d65da24eec3d54c175d013
+Content-Type: application/json
+
+{
+    "order_id": "20220331-2",
+    "status": "Verified"
+}
+
+###
+# Get Accepted Orders
+
+GET http://localhost:8000/delivery-person/accepted-orders/
+Authorization: Token <token>
+
+###

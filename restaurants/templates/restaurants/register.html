@@ -1,0 +1,97 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}
+    Register New Delivery Person | Foodie Administration
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">Foodie Administration</a></h1>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">Home</a>&rsaquo;
+        <a href="/admin/restaurants">Restaurants</a>&rsaquo;
+        <span>Register Restaurants</span>
+    </div>
+{% endblock %}
+
+{% block content %}
+     <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+
+     <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
+        integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
+        integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+
+    <h1>Register Restaurants</h1>
+    <br/>
+    <form method="post" action="{% url 'admin:restaurants_registerrestaurant_changelist' %}">
+        <table style="width: 30%;">
+            <tr>
+                <th>
+                    {{ form.full_name.label }}
+                </th>
+                <td>
+                    {{ form.full_name }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ form.phone_number.label }}
+                </th>
+                <td>
+                    {{ form.phone_number }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ form.email.label }}
+                </th>
+                <td>
+                    {{ form.email }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ form.open_hour.label }}
+                </th>
+                <td>
+                    {{ form.open_hour }}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ form.close_hour.label }}
+                </th>
+                <td>
+                    {{ form.close_hour }}
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <tr>
+            {% csrf_token %}
+            <input type="submit" value="Register" />
+        </tr>
+    </form>
+
+    <script>
+        $(function () {
+            $("#id_open_hour").datetimepicker({
+                datepicker:false,
+                format: 'H:i',
+            });
+            $("#id_close_hour").datetimepicker({
+                datepicker:false,
+                format: 'H:i',
+            });
+          });
+    </script>
+{% endblock %}

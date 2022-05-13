@@ -1,0 +1,53 @@
+# Searching foods and restaurants
+GET http://127.0.0.1:8000/api/search/?query=dhido
+###
+
+# Filtering Food
+# Always send lat and longitude while filtering food
+# Get food near customer location
+GET http://localhost:8000/foods/?lat=27.572572&lng=-82.534818
+
+###
+
+# Filter by top_rated
+GET http://localhost:8000/foods/?lat=27.572572&lng=-82.534818&top_rated=True
+###
+
+# Filter by favorite. Authentication is required for this.
+GET http://localhost:8000/foods/?lat=27.572572&lng=-82.534818&favorite=True
+Authorization: Token <token>
+
+###
+
+# Filter by veg
+GET http://localhost:8000/foods/?lat=27.572572&lng=-82.534818&veg=True
+
+###
+
+# Filter by offers
+GET http://localhost:8000/foods/?lat=27.572572&lng=-82.534818&offers=True
+
+
+# Filtering Food
+# Always send lat and longitude while filtering food. Append all filter you required. Authentication is required for favorite.
+GET http://localhost:8000/foods/?lat=27.572572&lng=-82.534818&top_rated=True&veg=True&offers=True
+
+###
+
+# Filtering restaurants
+# Always send lat and longitude while filtering restaurants
+# Get restaurants near customer location
+GET http://localhost:8000/restaurants/?lat=27.572572&lng=-82.534818
+
+###
+
+# Filter by top_rated
+GET http://localhost:8000/restaurants/?lat=27.572572&lng=-82.534818&top_rated=True
+
+###
+
+# Filter by favorite. Authentication is required for this.
+GET http://localhost:8000/restaurants/?lat=27.572572&lng=-82.534818&favorite=True
+Authorization: Token <token>
+
+###
